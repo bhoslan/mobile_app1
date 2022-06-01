@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:mobile_app1/pages/homePage.dart';
 
-void main(){
+import 'models/task_model.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   //En üstte siyah çizginin kaybolması için aşağıdaki kod bloğunu kullanıldı.
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  await Hive.initFlutter();
+  Hive.registerAdapter(TaskAdapter());
   runApp(const MyApp());
 }
 
