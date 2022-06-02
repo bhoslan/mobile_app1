@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile_app1/data/local_storage.dart';
 import '../models/task_model.dart';
-
+import 'package:mobile_app1/main.dart';
 class TaskItem extends StatefulWidget {
   Task task;
   TaskItem({Key? key, required this.task}) : super(key: key);
@@ -11,14 +12,17 @@ class TaskItem extends StatefulWidget {
 }
 
 class _TaskItemState extends State<TaskItem> {
-  TextEditingController _taskNameController = TextEditingController();
+  final TextEditingController _taskNameController = TextEditingController();
+  late LocalStorage _localStorage;
   @override
   void initState() {
     super.initState();
-    _taskNameController.text = widget.task.name;
+    _localStorage = locator<LocalStorage>();
+
   }
 
   Widget build(BuildContext context) {
+    _taskNameController.text = widget.task.name;
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
@@ -34,12 +38,13 @@ class _TaskItemState extends State<TaskItem> {
         leading: GestureDetector(
           onTap: () {
             widget.task.isCompleted = !widget.task.isCompleted;
+            _localStorage.updateTask(task: widget.task);
             setState(() {});
           },
           child: Container(
             child: Icon(
               (Icons.check),
-              color: Colors.white,
+              color: Colors.white, 
             ),
             decoration: BoxDecoration(
               color: widget.task.isCompleted ? Colors.green : Colors.white,
