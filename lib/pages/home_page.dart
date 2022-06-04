@@ -40,7 +40,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
             IconButton(
                 onPressed: () {
                   _showAddTaskBottomSheet(context);

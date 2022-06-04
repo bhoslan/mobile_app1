@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
         ),
         home: AnimatedSplashScreen(
             duration: 3000,
-            splash: Icons.home,
+            splash: Image.asset("assets/images/tik.png"),
             nextScreen: HomePage(),
             splashTransition: SplashTransition.fadeTransition,
             backgroundColor: Colors.blue));
